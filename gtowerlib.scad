@@ -176,5 +176,39 @@ module grow_mount()
     } 
 }
 
-grow_mount();
+module growwall_mount()
+{
+    difference(){
+      translate([0,0,0])  dome(in*2.5/2+4,2);  
+      cylinder(r=(in*1),h=100);
+      }
+  halfsize = in * 4 / 2;
+  difference(){    
+     translate([0-halfsize,0-halfsize,0]) cube([in*4,in*4,2]);
+     translate([0,0,-10]) cylinder(r=halfsize-15,h=20);
+     translate([-35,-35,-10]) cylinder(r=10,h=20);
+     translate([-35, 35,-10]) cylinder(r=10,h=20); 
+     translate([35,-35,-10]) cylinder(r=10,h=20);
+     translate([35, 35,-10]) cylinder(r=10,h=20);  
+     }    
+     
+  difference(){   
+    translate([halfsize-4,0-halfsize,0]) cube([6,in*4+2,50]);
+    translate([halfsize-5,0-halfsize+10,12]) rotate([0,90,0]) cylinder(r=2.5,h=10);
+    translate([halfsize-5,halfsize-10,12]) rotate([0,90,0]) cylinder(r=2.5,h=10);
+    translate([halfsize-5,0-halfsize+10,38]) rotate([0,90,0]) cylinder(r=2.5,h=10);
+    translate([halfsize-5,halfsize-10,38]) rotate([0,90,0]) cylinder(r=2.5,h=10); 
+    translate([halfsize-2,15,10]) rotate([90,0,-90]) linear_extrude(3)  text("NCC") ;
+    }
+  hull(){
+    translate([0-halfsize+(3.9*in)+1,0-halfsize+4,0]) rotate([0,0,-90]) cube([4,in*.1,50]);  
+    translate([0-halfsize,0-halfsize+4,0]) rotate([0,0,-90]) cube([4,in*.5,5]);
+    }  
+  hull(){
+    translate([0-halfsize+(3.9*in)+1,halfsize+2,0]) rotate([0,0,-90]) cube([4,in*.1,50]);  
+    translate([0-halfsize,halfsize+2,0]) rotate([0,0,-90]) cube([4,in*.5,5]);
+    }    
+}
+
+growwall_mount();
 //translate([100,100,0]) grow();
